@@ -21,6 +21,7 @@ Brian Butterfield as a service
 
 ## TODO
 
+* Add to github.io
 * CSS
 * JS
 * Images
