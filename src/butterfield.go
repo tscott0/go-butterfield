@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gorilla/mux"
 	"html/template"
 	"math/rand"
@@ -35,7 +36,7 @@ var Diet []string = []string{
 	"Sandwich casserole",
 }
 
-var templates = template.Must(template.ParseFiles("view.html"))
+var templates = template.Must(template.ParseGlob("templates/*.html"))
 var validPath = regexp.MustCompile("^/(view|random)$")
 
 func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
@@ -58,6 +59,7 @@ func randomHandler(w http.ResponseWriter, r *http.Request) {
 
 func makeHandler(fn func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println(r.URL.Path)
 		m := validPath.FindStringSubmatch(r.URL.Path)
 		if m == nil {
 			http.NotFound(w, r)
@@ -68,7 +70,8 @@ func makeHandler(fn func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 }
 
 func main() {
-	http.HandleFunc("/random", makeHandler(randomHandler))
+	r := mux.NewRouter()
+	r.HandleFunc("/random", makeHandler(randomHandler))
 
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", r)
 }
