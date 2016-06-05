@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gorilla/mux"
 	"html/template"
 	"math/rand"
 	"net/http"
@@ -13,23 +14,25 @@ type Page struct {
 }
 
 var Diet []string = []string{
-	"Pints o’ cream",
-	"Potato grids",
-	"Large macs",
-	"Chocolate quail’s eggs",
-	"Fluffy ruffs",
-	"Pasta pillows",
-	"Mcfortune cookies",
-	"Egg ‘n’ ham slabs",
-	"Pork cylinders",
+	"20 Cheese Omlette",
 	"Artificial bacon (Facon ™)",
-	"Sandwich casserole",
-	"Garlic pudding",
-	"Hoisin crispy owl",
+	"Birthday Pie",
 	"Bonbonbonbons",
+	"Chocolate quail’s eggs",
 	"Discount foie gras",
 	"During-dinner mints",
+	"Egg ‘n’ ham slabs",
+	"Fluffy ruffs",
+	"Garlic pudding",
+	"Hoisin crispy owl",
+	"Large macs",
+	"Mcfortune cookies",
+	"Pasta pillows",
+	"Pints o’ cream",
+	"Pork cylinders",
+	"Potato grids",
 	"Quiches lorraine",
+	"Sandwich casserole",
 }
 
 var templates = template.Must(template.ParseFiles("view.html"))
